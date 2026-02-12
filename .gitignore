@@ -1,0 +1,44 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.restore
+release.properties
+dependency-reduced-pom.xml
+build_number.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.settings/
+.project
+.classpath
+.factorypath
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+startup_error.log
+build_log.txt
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment
+.env
+.env.local
+
+# Temp
+tmp/
+temp/
