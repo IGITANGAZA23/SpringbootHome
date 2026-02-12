@@ -175,7 +175,7 @@ This project is open‑source and available under the **MIT License**.
 **Noble Prince**
 Backend developer focused on building what matters
 
-* GitHub: [https://github.com/your-username](https://github.com/IGITANGAZA23)
+* GitHub: [https://github.com/IGITANGAZA23](https://github.com/IGITANGAZA23)
 * Email: [igitangazanobleprince@gmail.com](mailto:igitangazanobleprince@gmail.com)
 
 ---
