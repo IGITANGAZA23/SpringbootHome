@@ -11,7 +11,7 @@
 	<groupId>com.igitan</groupId>
 	<artifactId>springboothome</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring Boot Home</name>
+	<name>Supermarket Billing System</name>
 	<description>A beginner‑friendly, production‑style Spring Boot project</description>
 	<properties>
 		<java.version>17</java.version>

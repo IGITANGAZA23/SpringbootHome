@@ -1,6 +1,6 @@
-# 🚀 Spring Boot Home
+# 🛒 Supermarket Billing System
 
-A **beginner‑friendly, production‑style Spring Boot project** that teaches how to build real backend applications using **clean architecture, REST APIs, authentication, and database integration** — without unnecessary complexity.
+A **comprehensive Spring Boot backend** for managing supermarket operations including **Products, Categories, and Billing**. This project follows **clean architecture, REST API best practices, and production-ready design**.
 
 Designed for learners who want to move from **Java theory → real industry projects**.
 
@@ -118,14 +118,16 @@ http://localhost:8080
 
 ## 📬 Example API Endpoints
 
-| Method | Endpoint              | Description       |
-| ------ | --------------------- | ----------------- |
-| POST   | `/api/auth/register`  | Register new user |
-| POST   | `/api/auth/login`     | Authenticate user |
-| GET    | `/api/resources`      | List resources    |
-| POST   | `/api/resources`      | Create resource   |
-| PUT    | `/api/resources/{id}` | Update resource   |
-| DELETE | `/api/resources/{id}` | Delete resource   |
+| Method | Endpoint               | Description             |
+| ------ | ---------------------- | ----------------------- |
+| POST   | `/api/auth/register`   | Register new user       |
+| POST   | `/api/auth/login`      | Authenticate user       |
+| GET    | `/api/products`        | List all products       |
+| POST   | `/api/products`        | Create new product      |
+| GET    | `/api/products/{id}`   | Get product by ID       |
+| PUT    | `/api/products/{id}`   | Update product          |
+| DELETE | `/api/products/{id}`   | Delete product          |
+| GET    | `/api/resources`       | List resources (Legacy) |
 
 ---
 
