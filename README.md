@@ -1,6 +1,8 @@
-# 🛒 Supermarket Billing System
+# SpringbootHome
 
-A **comprehensive Spring Boot backend** for managing supermarket operations including **Products, Categories, and Billing**. This project follows **clean architecture, REST API best practices, and production-ready design**.
+A **beginner‑friendly, production‑style Spring Boot project** that teaches how to build real backend applications using **clean architecture, REST APIs, authentication, and database integration** — without unnecessary complexity.
+
+It is done based on a  **comprehensive Spring Boot backend** for managing supermarket operations including **Products, Categories, and Billing**. This project follows **clean architecture, REST API best practices, and production-ready design**.
 
 Designed for learners who want to move from **Java theory → real industry projects**.
 
