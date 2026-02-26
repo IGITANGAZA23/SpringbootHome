@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+
+# JWT Configuration
+jwt:
+  secret: 9a4f2c8d3b7a1e5f8c6d4b2a1f3e5d7c9a4f2c8d3b7a1e5f8c6d4b2a1f3e5d7c
+  expiration: 86400000
+
+# Swagger UI Configuration
+springdoc:
+  swagger-ui:
+    custom-css: /swagger-theme.css
+    syntax-highlight:
+      theme: monokai

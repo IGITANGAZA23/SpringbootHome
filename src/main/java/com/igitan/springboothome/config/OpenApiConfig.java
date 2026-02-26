@@ -12,12 +12,12 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
   @Bean
-  public OpenAPI springBootHomeOpenAPI() {
+  public OpenAPI supermarketBillingOpenAPI() {
     final String securitySchemeName = "bearerAuth";
     return new OpenAPI()
-        .info(new Info().title("Spring Boot Home API")
-            .description("Beginner-friendly Spring Boot backend API documentation")
-            .version("v0.0.1"))
+        .info(new Info().title("Supermarket Billing System API")
+            .description("Comprehensive Backend API for Supermarket Management (Products, Categories, and Billing)")
+            .version("v1.0.0"))
         .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
         .components(new Components()
             .addSecuritySchemes(securitySchemeName,

@@ -1,0 +1,155 @@
+/* Supermarket Billing System - Premium Dark Theme for Swagger UI */
+:root {
+  --primary-color: #00ff88;
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+}
+
+body,
+.swagger-ui {
+  background-color: var(--bg-dark) !important;
+  color: var(--text-main) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Header/Topbar */
+.swagger-ui .topbar {
+  background-color: #020617 !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.swagger-ui .info .title {
+  color: var(--primary-color) !important;
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.swagger-ui .info p,
+.swagger-ui .info li,
+.swagger-ui .info td {
+  color: var(--text-muted) !important;
+}
+
+/* Sections */
+.swagger-ui .opblock-tag {
+  color: var(--text-main) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 10px 0 !important;
+}
+
+.swagger-ui .opblock {
+  background: var(--bg-card) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin-bottom: 1rem !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.swagger-ui .opblock .opblock-summary-path {
+  color: var(--text-main) !important;
+  font-weight: 600 !important;
+}
+
+.swagger-ui .opblock .opblock-summary-description {
+  color: var(--text-muted) !important;
+}
+
+/* Methods Colors */
+.swagger-ui .opblock.opblock-get {
+  border-color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.05) !important;
+}
+
+.swagger-ui .opblock.opblock-post {
+  border-color: var(--primary-color) !important;
+  background: rgba(0, 255, 136, 0.05) !important;
+}
+
+.swagger-ui .opblock.opblock-put {
+  border-color: #f59e0b !important;
+  background: rgba(245, 158, 11, 0.05) !important;
+}
+
+.swagger-ui .opblock.opblock-delete {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.05) !important;
+}
+
+.swagger-ui .opblock.opblock-get .opblock-summary-method {
+  background: #3b82f6 !important;
+  border-radius: 6px;
+}
+
+.swagger-ui .opblock.opblock-post .opblock-summary-method {
+  background: var(--primary-color) !important;
+  color: #000 !important;
+  border-radius: 6px;
+}
+
+.swagger-ui .opblock.opblock-put .opblock-summary-method {
+  background: #f59e0b !important;
+  border-radius: 6px;
+}
+
+.swagger-ui .opblock.opblock-delete .opblock-summary-method {
+  background: #ef4444 !important;
+  border-radius: 6px;
+}
+
+/* Models */
+.swagger-ui section.models {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  background: var(--bg-card) !important;
+}
+
+.swagger-ui section.models h4 {
+  color: var(--text-muted) !important;
+}
+
+.swagger-ui .model-box {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Inputs & Table */
+.swagger-ui input,
+.swagger-ui select,
+.swagger-ui textarea {
+  background: #0f172a !important;
+  color: #fff !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+}
+
+.swagger-ui .table-container {
+  padding: 20px !important;
+}
+
+.swagger-ui table thead tr th {
+  color: var(--text-main) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Authorized Button */
+.swagger-ui .btn.authorize {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  background: transparent !important;
+}
+
+.swagger-ui .btn.authorize svg {
+  fill: var(--primary-color) !important;
+}
+
+/* Scheme Container */
+.swagger-ui .scheme-container {
+  background: var(--bg-card) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
