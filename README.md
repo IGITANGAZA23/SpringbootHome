@@ -64,13 +64,20 @@ This structure reflects **industry‑standard clean architecture** used in real 
 * Pagination & search support
 * Clean JSON responses
 
-### 🔐 Authentication & Security
+### 🔐 Authentication & Security (Phase 3)
 
-* User registration & login
-* Password hashing
-* JWT token authentication
-* Protected API routes
-* Role‑based access *(optional)*
+This project implements a robust security layer answering the question: **"Who can access what?"**
+
+*   **Day 13: Spring Security**: Protects all endpoints by default using a Filter Chain.
+*   **Day 14: BCrypt Hashing**: Passwords are never stored as plain text. We use the BCrypt algorithm to safely hash passwords before they hit the database.
+*   **Day 15: JWT (JSON Web Tokens)**: Stateless authentication.
+    1.  **Login**: User sends credentials.
+    2.  **Token**: Server validates and returns a signed JWT.
+    3.  **Access**: Client sends token in `Authorization: Bearer <token>` header for every request.
+*   **Day 16: Role-Based Authorization**:
+    *   `ROLE_USER`: Can view products (`GET`).
+    *   `ROLE_ADMIN`: Can perform sensitive operations (`POST`, `PUT`, `DELETE`).
+*   **Day 17: Secure Error Responses**: Prevents information leakage by hiding stack traces and internal SQL details, returning clean JSON error bodies.
 
 ### ✅ Validation & Error Handling
 
@@ -120,16 +127,22 @@ http://localhost:8080
 
 ## 📬 Example API Endpoints
 
-| Method | Endpoint               | Description             |
-| ------ | ---------------------- | ----------------------- |
-| POST   | `/api/auth/register`   | Register new user       |
-| POST   | `/api/auth/login`      | Authenticate user       |
-| GET    | `/api/products`        | List all products       |
-| POST   | `/api/products`        | Create new product      |
-| GET    | `/api/products/{id}`   | Get product by ID       |
-| PUT    | `/api/products/{id}`   | Update product          |
-| DELETE | `/api/products/{id}`   | Delete product          |
-| GET    | `/api/resources`       | List resources (Legacy) |
+| Method | Endpoint             | Description             | Auth? | Role         |
+| ------ | -------------------- | ----------------------- | ----- | ------------ |
+| POST   | `/api/auth/register` | Register new user       | ❌    | None         |
+| POST   | `/api/auth/login`    | Authenticate user       | ❌    | None         |
+| GET    | `/api/products`      | List all products       | ❌    | None         |
+| POST   | `/api/products`      | Create new product      | ✅    | `ROLE_ADMIN` |
+| GET    | `/api/products/{id}` | Get product by ID       | ❌    | None         |
+| PUT    | `/api/products/{id}` | Update product          | ✅    | `ROLE_ADMIN` |
+| DELETE | `/api/products/{id}` | Delete product          | ✅    | `ROLE_ADMIN` |
+| GET    | `/api/resources`     | List resources (Legacy) | ✅    | `ROLE_USER`  |
+
+> [!TIP]
+> **Testing Admin Access**: By default, new registrations are assigned `ROLE_USER`. To test admin-only features, you can manually update a user's role in the database:
+> ```sql
+> INSERT INTO user_roles (user_id, roles) VALUES (1, 'ROLE_ADMIN');
+> ```
 
 ---
 

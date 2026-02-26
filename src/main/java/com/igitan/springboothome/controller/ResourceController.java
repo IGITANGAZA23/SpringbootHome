@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,16 +29,20 @@ public class ResourceController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ResourceDTO> createResource(@Valid @RequestBody ResourceDTO resourceDTO) {
         return new ResponseEntity<>(resourceService.createResource(resourceDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResourceDTO> updateResource(@PathVariable Long id, @Valid @RequestBody ResourceDTO resourceDTO) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ResourceDTO> updateResource(@PathVariable Long id,
+            @Valid @RequestBody ResourceDTO resourceDTO) {
         return ResponseEntity.ok(resourceService.updateResource(id, resourceDTO));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteResource(@PathVariable Long id) {
         resourceService.deleteResource(id);
         return ResponseEntity.noContent().build();
