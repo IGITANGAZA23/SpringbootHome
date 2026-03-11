@@ -45,19 +45,22 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        
+
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userRepository.findByUsername(userDetails.getUsername()).get();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new AuthResponse(jwt, 
-                                                 user.getId(), 
-                                                 userDetails.getUsername(), 
-                                                 user.getEmail(), 
-                                                 roles));
+        return ResponseEntity.ok(new AuthResponse(jwt,
+                user.getId(),
+                userDetails.getUsername(),
+                user.getEmail(),
+                roles));
     }
+
+    @Autowired
+    com.igitan.springboothome.service.EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest signUpRequest) {
@@ -79,8 +82,11 @@ public class AuthController {
         Set<String> roles = new HashSet<>();
         roles.add("ROLE_USER");
         user.setRoles(roles);
-        
+
         userRepository.save(user);
+
+        // Send Welcome Email
+        emailService.sendWelcomeEmail(user.getEmail(), user.getUsername());
 
         return ResponseEntity.ok("User registered successfully!");
     }
