@@ -1,4 +1,6 @@
 spring:
+  cache:
+    type: simple
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver

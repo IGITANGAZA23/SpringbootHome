@@ -8,11 +8,13 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  cache:
+    type: simple
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    username: ${MAIL_USERNAME:igitangazanobleprince@gmail.com}
+    password: ${MAIL_PASSWORD:llaz snsk jfhb alib}
     properties:
       mail:
         smtp:

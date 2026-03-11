@@ -32,6 +32,21 @@ public class EmailService {
   }
 
   @Async
+  public void send2FACode(String toEmail, String code) {
+    try {
+      SimpleMailMessage message = new SimpleMailMessage();
+      message.setTo(toEmail);
+      message.setSubject("Your 2FA Verification Code");
+      message.setText("Your verification code is: " + code + "\n\nThis code will expire shortly.");
+
+      mailSender.send(message);
+      System.out.println("✅ 2FA code sent to " + toEmail);
+    } catch (Exception e) {
+      System.err.println("❌ Failed to send 2FA code to " + toEmail + ": " + e.getMessage());
+    }
+  }
+
+  @Async
   public void sendNotificationEmail(String toEmail, String subject, String content) throws MessagingException {
     MimeMessage message = mailSender.createMimeMessage();
     MimeMessageHelper helper = new MimeMessageHelper(message, true);

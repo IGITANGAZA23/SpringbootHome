@@ -16,9 +16,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import com.igitan.springboothome.dto.Verify2FARequest;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,11 +45,22 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
+        User user = userRepository.findByUsername(loginRequest.getUsername()).get();
+
+        // Check if 2FA is needed
+        if (user.isTwoFactorEnabled()) {
+            String code = String.valueOf(100000 + new Random().nextInt(900000));
+            user.setTwoFactorCode(code);
+            userRepository.save(user);
+
+            emailService.send2FACode(user.getEmail(), code);
+            return ResponseEntity.ok("2FA code sent to your email. Please verify.");
+        }
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userRepository.findByUsername(userDetails.getUsername()).get();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
@@ -55,6 +68,34 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(jwt,
                 user.getId(),
                 userDetails.getUsername(),
+                user.getEmail(),
+                roles));
+    }
+
+    @PostMapping("/verify-2fa")
+    public ResponseEntity<?> verify2FA(@Valid @RequestBody Verify2FARequest verifyRequest) {
+        User user = userRepository.findByUsername(verifyRequest.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getTwoFactorCode() == null || !user.getTwoFactorCode().equals(verifyRequest.getCode())) {
+            return ResponseEntity.badRequest().body("Error: Invalid verification code!");
+        }
+
+        // Clear code after successful verification
+        user.setTwoFactorCode(null);
+        userRepository.save(user);
+
+        // Authenticate manually to generate token
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), null,
+                new HashSet<>());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        List<String> roles = user.getRoles().stream().collect(Collectors.toList());
+
+        return ResponseEntity.ok(new AuthResponse(jwt,
+                user.getId(),
+                user.getUsername(),
                 user.getEmail(),
                 roles));
     }
@@ -82,6 +123,7 @@ public class AuthController {
         Set<String> roles = new HashSet<>();
         roles.add("ROLE_USER");
         user.setRoles(roles);
+        user.setTwoFactorEnabled(true);
 
         userRepository.save(user);
 

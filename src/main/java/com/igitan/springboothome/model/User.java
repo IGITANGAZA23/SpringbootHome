@@ -22,6 +22,9 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
 
+    private String twoFactorCode;
+    private boolean isTwoFactorEnabled = false;
+
     public User() {
     }
 
@@ -116,5 +119,21 @@ public class User {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
+    }
+
+    public String getTwoFactorCode() {
+        return twoFactorCode;
+    }
+
+    public void setTwoFactorCode(String twoFactorCode) {
+        this.twoFactorCode = twoFactorCode;
+    }
+
+    public boolean isTwoFactorEnabled() {
+        return isTwoFactorEnabled;
+    }
+
+    public void setTwoFactorEnabled(boolean twoFactorEnabled) {
+        isTwoFactorEnabled = twoFactorEnabled;
     }
 }
