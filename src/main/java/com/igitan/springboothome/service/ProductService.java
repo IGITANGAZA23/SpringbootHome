@@ -69,6 +69,7 @@ public class ProductService {
       dto.setCategoryId(product.getCategory().getId());
       dto.setCategoryName(product.getCategory().getName());
     }
+    dto.setImageUrl(product.getImageUrl());
     return dto;
   }
 
@@ -77,6 +78,7 @@ public class ProductService {
     product.setDescription(dto.getDescription());
     product.setPrice(dto.getPrice());
     product.setStockQuantity(dto.getStockQuantity());
+    product.setImageUrl(dto.getImageUrl());
     if (dto.getCategoryId() != null) {
       Category category = categoryRepository.findById(dto.getCategoryId())
           .orElseThrow(() -> new RuntimeException("Category not found with id: " + dto.getCategoryId()));

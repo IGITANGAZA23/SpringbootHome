@@ -60,6 +60,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(AntPathRequestMatcher
                                         .antMatcher(org.springframework.http.HttpMethod.GET, "/api/products/**"))
                                 .permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/api/files/download/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/swagger-theme.css")).permitAll()

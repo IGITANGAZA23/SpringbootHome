@@ -24,16 +24,28 @@ public class Product {
   @JoinColumn(name = "category_id")
   private Category category;
 
+  private String imageUrl;
+
   public Product() {
   }
 
-  public Product(Long id, String name, String description, Double price, Integer stockQuantity, Category category) {
+  public Product(Long id, String name, String description, Double price, Integer stockQuantity, Category category,
+      String imageUrl) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
     this.stockQuantity = stockQuantity;
     this.category = category;
+    this.imageUrl = imageUrl;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
   }
 
   public Long getId() {

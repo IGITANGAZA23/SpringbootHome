@@ -16,3 +16,13 @@ springdoc:
     custom-css: /swagger-theme.css
     syntax-highlight:
       theme: monokai
+
+# File Upload Configuration
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+file:
+  upload-dir: uploads

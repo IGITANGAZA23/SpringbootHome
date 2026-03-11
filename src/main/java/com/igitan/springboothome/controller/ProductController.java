@@ -46,4 +46,23 @@ public class ProductController {
     productService.deleteProduct(id);
     return ResponseEntity.noContent().build();
   }
+
+  @Autowired
+  private com.igitan.springboothome.service.FileStorageService fileStorageService;
+
+  @PostMapping("/{id}/image")
+  @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<ProductDTO> uploadProductImage(@PathVariable Long id,
+      @RequestParam("file") org.springframework.web.multipart.MultipartFile file) {
+    String fileName = fileStorageService.storeFile(file);
+    String fileDownloadUri = org.springframework.web.servlet.support.ServletUriComponentsBuilder
+        .fromCurrentContextPath()
+        .path("/api/files/download/")
+        .path(fileName)
+        .toUriString();
+
+    ProductDTO productDTO = productService.getProductById(id);
+    productDTO.setImageUrl(fileDownloadUri);
+    return ResponseEntity.ok(productService.updateProduct(id, productDTO));
+  }
 }
