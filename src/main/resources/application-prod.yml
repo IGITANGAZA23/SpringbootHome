@@ -6,7 +6,7 @@ spring:
     driverClassName: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: ${DDL_AUTO:validate}
     show-sql: false
     properties:
       hibernate:
