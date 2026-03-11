@@ -28,6 +28,9 @@ public class ProductControllerTest {
   @MockBean
   private ProductService productService;
 
+  @MockBean
+  private com.igitan.springboothome.service.FileStorageService fileStorageService;
+
   private ProductDTO productDTO;
 
   @BeforeEach

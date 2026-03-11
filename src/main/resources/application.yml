@@ -4,6 +4,21 @@ server:
 spring:
   profiles:
     active: dev
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:igitangazanobleprince@gmail.com}
+    password: ${MAIL_PASSWORD:Navis@123}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 # JWT Configuration
 jwt:
@@ -18,25 +33,5 @@ springdoc:
       theme: monokai
 
 # File Upload Configuration
-spring:
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-
 file:
   upload-dir: uploads
-
-# Email Configuration
-spring:
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${MAIL_USERNAME:youremail@gmail.com}
-    password: ${MAIL_PASSWORD:your-app-password}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
