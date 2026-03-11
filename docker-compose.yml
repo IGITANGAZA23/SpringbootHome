@@ -18,6 +18,12 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+
   app:
     build: .
     container_name: springboot-app
@@ -29,8 +35,11 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=yourpassword
       - DDL_AUTO=update
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
     depends_on:
       - db
+      - redis
 
 volumes:
   postgres_data:

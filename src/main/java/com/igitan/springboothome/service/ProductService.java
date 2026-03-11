@@ -6,6 +6,9 @@ import com.igitan.springboothome.model.Product;
 import com.igitan.springboothome.repository.CategoryRepository;
 import com.igitan.springboothome.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +24,14 @@ public class ProductService {
   @Autowired
   private CategoryRepository categoryRepository;
 
+  @Cacheable(value = "products")
   public List<ProductDTO> getAllProducts() {
     return productRepository.findAll().stream()
         .map(this::convertToDTO)
         .collect(Collectors.toList());
   }
 
+  @Cacheable(value = "product", key = "#id")
   public ProductDTO getProductById(Long id) {
     Product product = productRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -34,6 +39,7 @@ public class ProductService {
   }
 
   @Transactional
+  @CacheEvict(value = "products", allEntries = true)
   public ProductDTO createProduct(ProductDTO productDTO) {
     Product product = new Product();
     updateProductFromDTO(product, productDTO);
@@ -42,6 +48,10 @@ public class ProductService {
   }
 
   @Transactional
+  @Caching(evict = {
+      @CacheEvict(value = "products", allEntries = true),
+      @CacheEvict(value = "product", key = "#id")
+  })
   public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
     Product product = productRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -51,6 +61,10 @@ public class ProductService {
   }
 
   @Transactional
+  @Caching(evict = {
+      @CacheEvict(value = "products", allEntries = true),
+      @CacheEvict(value = "product", key = "#id")
+  })
   public void deleteProduct(Long id) {
     if (!productRepository.existsById(id)) {
       throw new RuntimeException("Product not found with id: " + id);
